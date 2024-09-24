@@ -2,10 +2,10 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar } from "recharts";
-import { TrendingUp } from "lucide-react";
 import dynamic from "next/dynamic";
 import { StakingActivityChart } from "./StakingActivityChart";
 import { TxnSearchInput } from "./TxnSearchInput";
+import { SolanaPriceCard } from "./SolanaPriceCard";
 
 const BarChart = dynamic(() => import("recharts").then((mod) => mod.BarChart), {
   ssr: false,
@@ -55,22 +55,7 @@ export function Dashboard() {
       <TxnSearchInput/>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card className="bg-[#1c1c1c] border-none rounded-xl">
-          <CardHeader>
-            <CardTitle className="text-white">SOL Price</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-bold text-white">$131.06</div>
-            <div className="text-sm text-gray-400">$61.4B Market Cap</div>
-            <div className="text-sm text-green-500 flex items-center">
-              0.38% <TrendingUp className="h-4 w-4 ml-1" />
-            </div>
-            <div className="text-xs text-gray-400">
-              via Binance vs yesterday
-            </div>
-          </CardContent>
-        </Card>
-
+        <SolanaPriceCard/>
         <Card className="bg-[#1c1c1c] border-none rounded-xl">
           <CardHeader>
             <CardTitle className="text-white">Epoch 672</CardTitle>

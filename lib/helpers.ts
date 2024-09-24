@@ -62,6 +62,27 @@ export const fetchParsedTransactions = async (
     }
   };
 
+  export const fetchTokenPrice = async (
+    tokenAddress: string
+  ): Promise<string> => {
+    try {
+
+      const response = await fetch(
+        `https://api.jup.ag/price/v2?ids=${tokenAddress}`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      const priceInfo = data.data[tokenAddress].price
+      console.log('data', priceInfo)
+      return priceInfo;
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+      return '';
+    }
+  };
+
 export const fetchParsedTransactionsMap = async (
     txns: string[]
   ): Promise<Map<string, HeliusParsedTransaction>> => {
