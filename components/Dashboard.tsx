@@ -1,15 +1,19 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bar } from "recharts"
-import { TrendingUp } from "lucide-react"
-import dynamic from "next/dynamic"
-import { StakingActivityChart } from "./StakingActivityChart"
-import { useState } from "react"
-import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bar } from "recharts";
+import { TrendingUp } from "lucide-react";
+import dynamic from "next/dynamic";
+import { StakingActivityChart } from "./StakingActivityChart";
+import { TxnSearchInput } from "./TxnSearchInput";
 
-const BarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false })
-const CartesianGrid = dynamic(() => import('recharts').then((mod) => mod.CartesianGrid), { ssr: false })
+const BarChart = dynamic(() => import("recharts").then((mod) => mod.BarChart), {
+  ssr: false,
+});
+const CartesianGrid = dynamic(
+  () => import("recharts").then((mod) => mod.CartesianGrid),
+  { ssr: false }
+);
 
 const mockTpsData = [
   { name: "1", tps: 500 },
@@ -24,39 +28,31 @@ const mockTpsData = [
   { name: "10", tps: 560 },
   { name: "11", tps: 565 },
   { name: "12", tps: 557 },
-]
-
+];
 
 export function Dashboard() {
 
-  const [txn, setTxn] = useState("")
-  const router = useRouter();
-
-  // Replace the existing handleSubmit function with this:
-  const handleSubmit = () => {
-    if (txn.trim()) {
-      router.push(`/txn/${txn}`);
-    }
-  };
-  
 
   return (
-    <div className="p-8 space-y-4 bg-[#0a0a0a] text-white">
-
-      <div className="w-full bg-[#1c1c1c] rounded-lg p-2">
-        <input
+    <div className="space-y-4 bg-[#0a0a0a] text-white">
+      <h2 className="flex justify-center scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        SolSearcher
+      </h2>
+      {/* <div className="w-full rounded-lg">
+        <Input
           type="text"
-          placeholder="Search by address, transaction hash, block or token"
-          className="w-full bg-transparent outline-none text-white"
+          placeholder="Search by transaction hash"
+          className="h-8"
           onChange={(e) => setTxn(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               e.preventDefault();
               handleSubmit();
             }
           }}
         />
-      </div>
+      </div> */}
+      <TxnSearchInput/>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card className="bg-[#1c1c1c] border-none rounded-xl">
@@ -69,7 +65,9 @@ export function Dashboard() {
             <div className="text-sm text-green-500 flex items-center">
               0.38% <TrendingUp className="h-4 w-4 ml-1" />
             </div>
-            <div className="text-xs text-gray-400">via Binance vs yesterday</div>
+            <div className="text-xs text-gray-400">
+              via Binance vs yesterday
+            </div>
           </CardContent>
         </Card>
 
@@ -88,7 +86,9 @@ export function Dashboard() {
           <CardHeader>
             <CardTitle className="flex justify-between text-white">
               True TPS
-              <span className="text-xs bg-[#2c2c2c] px-2 py-1 rounded-full">Live</span>
+              <span className="text-xs bg-[#2c2c2c] px-2 py-1 rounded-full">
+                Live
+              </span>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -130,5 +130,5 @@ export function Dashboard() {
         </CardContent>
       </Card> */}
     </div>
-  )
+  );
 }

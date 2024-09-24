@@ -73,6 +73,12 @@ export const fetchParsedTransactionsMap = async (
     return parsedTransactionsMap;
   };
 
+// NOTE(zfaizal2): A crude method to detect if a transaction has been sandwiched
+// Here a few basic checks are done to potentially spot a potential sandwiching
+// First, checking if transaction is present in a jito bundle
+// Then checking if three transactions are present
+// If present, parse out SOL transfer amounts to calculate sandwich profit
+
 export const detectSandwich = (
     bundleId: string,
     parsedTxns: Map<string, HeliusParsedTransaction>
