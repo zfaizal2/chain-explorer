@@ -81,10 +81,8 @@ export function SolanaTpsChart({ tpsData, realTps }: SolanaTpsChartParams) {
               content={
                 <ChartTooltipContent
                   className="w-[150px] bg-[#1c1c1c] text-white"
-                  nameKey="tps"
-                  labelFormatter={(value) => {
-                    return value;
-                  }}
+                  nameKey="slot"
+                  labelFormatter={(value) => value}
                 />
               }
             />

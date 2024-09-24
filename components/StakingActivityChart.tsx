@@ -38,7 +38,7 @@ const chartConfig = {
     color: "hsl(var(--chart-2))",
   },
   totalCirculatingSupply: {
-    label: "Total Circulating Supply",
+    label: "Circulating Supply",
     color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig
@@ -49,7 +49,7 @@ export function StakingActivityChart() {
       <CardHeader>
         <CardTitle className="text-white">Staking Activity</CardTitle>
         <CardDescription className="text-gray-400">
-          Showing total visitors for the last 6 months
+          Showing total stake activity for the last 7 days
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -80,7 +80,7 @@ export function StakingActivityChart() {
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
+              content={<ChartTooltipContent className="bg-[#1c1c1c] text-white" indicator="line" />}
             />
             <Area
               type="monotone"
@@ -107,10 +107,10 @@ export function StakingActivityChart() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none text-white">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              Active stake trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
             </div>
             <div className="flex items-center gap-2 leading-none text-gray-400">
-              January - June 2024
+              {chartData[0].date} - {chartData[chartData.length - 1].date}
             </div>
           </div>
         </div>

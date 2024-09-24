@@ -1,5 +1,5 @@
 import { HeliusParsedTransaction } from "@/types/helius";
-import { WSOL_MINT } from "./consts";
+import { PERFORMANCE_SAMPLE_LIMIT, WSOL_MINT } from "./consts";
 import { Connection, PerfSample } from "@solana/web3.js";
 
 const connection = new Connection(
@@ -89,22 +89,7 @@ export const fetchTokenPrice = async (
 
 export const fetchSolanaPerformanceStats = async (): Promise<PerfSample[]> => {
   try {
-    return connection.getRecentPerformanceSamples(60);
-    //   const requestBody = {id:1,jsonrpc:"2.0",method:"getRecentPerformanceSamples",params:[360]}
-    //   const body = JSON.stringify(requestBody);
-
-    //   const response = await fetch(
-    //     `https://rpc.helius.xyz/v0/transactions?api-key=${process.env.HELIUS_RPC_API_KEY}`,
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body,
-    //     }
-    //   );
-    //   const data: HeliusParsedTransaction[] = await response.json();
-    //   return data;
+    return connection.getRecentPerformanceSamples(PERFORMANCE_SAMPLE_LIMIT);
   } catch (error) {
     console.error("Error fetching performance stats:", error);
     return [];

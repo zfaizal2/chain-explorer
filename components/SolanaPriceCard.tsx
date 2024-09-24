@@ -6,11 +6,11 @@ import { fetchTokenPrice } from "@/lib/helpers";
 export const SolanaPriceCard = async () => {
   const priceInfo = await fetchTokenPrice(WSOL_MINT);
   return (
-    <Card className="bg-[#1c1c1c] border-none rounded-xl">
+    <Card className="bg-[#1c1c1c] border-none rounded-xl flex flex-col">
       <CardHeader>
         <CardTitle className="text-white">SOL Price</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="mt-auto">
         <div className="text-4xl font-bold text-white">${priceInfo.slice(0,6)}</div>
         <div className="text-sm text-gray-400">$61.4B Market Cap</div>
         <div className="text-sm text-green-500 flex items-center">

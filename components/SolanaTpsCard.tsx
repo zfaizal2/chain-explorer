@@ -1,6 +1,7 @@
 import { Card } from "./ui/card";
 import { fetchSolanaPerformanceStats } from "@/lib/helpers";
 import { SolanaTpsChart } from "./SolanaTpsChart";
+import { PERFORMANCE_SAMPLE_LIMIT } from "@/lib/consts";
 
 export const SolanaTpsCard = async () => {
   const solanaPerformanceSamples = await fetchSolanaPerformanceStats();
@@ -11,10 +12,10 @@ export const SolanaTpsCard = async () => {
     totalTransactions += tps;
     return { slot: sample.slot, tps };
   });
-  const realTps = totalTransactions / 60;
+  const realTps = totalTransactions / PERFORMANCE_SAMPLE_LIMIT;
 
   return (
-    <Card className="bg-[#1c1c1c] border-none rounded-xl col-span-2">
+    <Card className="bg-[#1c1c1c] border-none rounded-xl col-span-3">
 
     <SolanaTpsChart tpsData={tpsData} realTps={realTps}/>
 
