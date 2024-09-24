@@ -25,7 +25,7 @@ export type InstructionData = {
 export type TokenTransfer = {
   fromUserAccount: string;
   toUserAccount: string;
-  amount: number;
+  tokenAmount: number;
   mint: string;
   fromTokenAccount: string;
   toTokenAccount: string;
@@ -37,7 +37,7 @@ export type NativeTransfer = {
   amount: number;
 };
 
-export type HeliusTransaction = {
+export type HeliusParsedTransaction = {
   description: string;
   type: string;
   source: string;
