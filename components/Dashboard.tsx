@@ -1,4 +1,4 @@
-import { StakingActivityChart } from "./StakingActivityChart";
+import { StakingActivityCard } from "./StakingActivityCard";
 import { TxnSearchInput } from "./TxnSearchInput";
 import { SolanaPriceCard } from "./SolanaPriceCard";
 import { SolanaTpsCard } from "./SolanaTpsCard";
@@ -19,7 +19,7 @@ export function Dashboard() {
         <SolanaPriceCard />
         <SolanaTpsCard />
       </div>
-      <StakingActivityChart />
+      <StakingActivityCard />
     </div>
   );
 }

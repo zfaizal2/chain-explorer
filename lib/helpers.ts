@@ -132,6 +132,78 @@ export const fetchTokenMetadata = async (
   }
 };
 
+type EpochChart = {
+  name: string;
+  data: number[]
+};
+
+export type StakingStatsResponse = {
+  epochCharts: {
+    activated: EpochChart;
+    balance: EpochChart;
+    deactivated: EpochChart;
+    net: EpochChart;
+  };
+};
+
+export const fetchStakingStats = async () => {
+  try {
+    const response = await fetch(`https://solanacompass.com/stats`, {
+      method: "GET",
+    });
+    const data = await response.json();
+    // return data as StakingStatsResponse;
+    return mappedStakingStats(data);
+  } catch (error) {
+    console.error("Error fetching token metadat:", error);
+    return {} as never;
+  }
+};
+
+export type MappedStakingStats = {
+    epoch: string,
+    activatingStake: number,
+    deactivatingStake: number,
+    totalStake:number,
+}
+
+export const mappedStakingStats = async (
+  stakingStats: StakingStatsResponse
+) => {
+  // console.log('stakingStats', stakingStats.epochCharts.deactivated)
+  const epochs = Object.keys(stakingStats.epochCharts.activated.data);
+  const activatingStake = Object.values(
+    stakingStats.epochCharts.activated.data
+  );
+  const totalStake = Object.values(stakingStats.epochCharts.balance.data).slice(
+    -activatingStake.length
+  );
+  const deactivatedStake = Object.values(
+    stakingStats.epochCharts.deactivated.data
+  );
+  let stakingChange = 0;
+  const stakingChartData = epochs.map((epoch, index) => {
+    const epochNumber = parseInt(epoch);
+    stakingChange +=
+      activatingStake[index] +
+      deactivatedStake[index];
+      console.log('epoch', epochNumber, activatingStake[index], deactivatedStake[index])
+    return {
+      epoch,
+      activatingStake: activatingStake[index],
+      deactivatingStake: deactivatedStake[index],
+      totalStake: totalStake[index],
+    } as MappedStakingStats;
+  });
+  const startEpochStake = stakingChartData[0].totalStake;
+  const stakingPercentChange = (stakingChange / startEpochStake) * 100;
+  console.log('stakingPercentChange', stakingPercentChange, stakingChange, startEpochStake)
+  return {
+    stakingChartData,
+    stakingPercentChange
+  }
+};
+
 // NOTE(zfaizal2): A crude method to detect if a transaction has been sandwiched
 // Here a few basic checks are done to potentially spot a potential sandwiching
 // First, checking if transaction is present in a jito bundle
