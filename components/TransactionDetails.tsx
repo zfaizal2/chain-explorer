@@ -71,6 +71,10 @@ const TransactionDetails: React.FC<TransactionDetailsProps> = async ({
               <p className="text-gray-400">Fee Payer</p>
               <p className="text-white">{parsedTxn.feePayer}</p>
             </div>
+            <div className="flex justify-between">
+              <p className="text-gray-400">Action</p>
+              <p className="text-white">{parsedTxn.type}</p>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -127,7 +131,13 @@ const TransactionDetails: React.FC<TransactionDetailsProps> = async ({
                     </TableCell>
                     <TableCell>{transfer.toUserAccount}</TableCell>
                     <TableCell className="flex items-center">
-                      <Image className='rounded-full mr-2' src={transfer.logoURI} alt={transfer.symbol} width={25} height={25}/>
+                      <Image
+                        className="rounded-full mr-2"
+                        src={transfer.logoURI}
+                        alt={transfer.symbol}
+                        width={25}
+                        height={25}
+                      />
                       {transfer.symbol}
                     </TableCell>
                     <TableCell className="text-right">
