@@ -17,13 +17,13 @@ export const SandwichAlert: React.FC<SandwichAlertProps> = async ({
 
   return txnSandwichInfo.isSandwiched ? (
     <div className="mb-4">
-      <Alert>
+      <Alert className="bg-[#8000ff]">
         <BadgeAlert className="h-4 w-4" />
         <AlertTitle className="text-l font-bold">This Transaction may have been sandwiched!</AlertTitle>
         <AlertDescription>
           This transaction has been found in a Jito bundle and may have been
           sandwiched, where {txnSandwichInfo.lostValue} SOL was extracted. Click{" "}
-          <Link className="underline" href={`https://explorer.jito.wtf/bundle/${bundleId}`}>
+          <Link className="underline" target='_blank' href={`https://explorer.jito.wtf/bundle/${bundleId}`}>
             here
           </Link>{" "}
           for a detailed view in the Jito Explorer.

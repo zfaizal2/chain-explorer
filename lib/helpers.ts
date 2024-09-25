@@ -79,7 +79,6 @@ export const fetchTokenPrice = async (
     );
     const data = await response.json();
     const priceInfo = data.data[tokenAddress].price;
-    console.log("data", priceInfo);
     return priceInfo;
   } catch (error) {
     console.error("Error fetching token price:", error);
@@ -105,6 +104,32 @@ export const fetchParsedTransactionsMap = async (
     parsedTransactionsMap.set(txns[index], parsedTxn);
   });
   return parsedTransactionsMap;
+};
+
+type TokenMetadata = {
+  name: string;
+  symbol: string;
+  address: string;
+  decimals: string;
+  logoURI: string;
+};
+
+export const fetchTokenMetadata = async (
+  tokenAddress: string
+): Promise<TokenMetadata | never> => {
+  try {
+    const response = await fetch(
+      `https://tokens.jup.ag/token/${tokenAddress}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    return data as TokenMetadata;
+  } catch (error) {
+    console.error("Error fetching token metadat:", error);
+    return {} as never;
+  }
 };
 
 // NOTE(zfaizal2): A crude method to detect if a transaction has been sandwiched

@@ -1,11 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid } from "recharts";
 
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -48,9 +49,10 @@ export function SolanaTpsChart({ tpsData, realTps }: SolanaTpsChartParams) {
       <CardHeader className="flex flex-col items-stretch space-y-0  p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5  text-white sm:py-6">
           <CardTitle>Real TPS</CardTitle>
+          <CardDescription>Average non-vote transactions in last 30 minutes</CardDescription>
         </div>
         <div className="flex justify-center px-6 py-5">
-          <div className="text-lg text-white font-bold leading-none mr-2 sm:text-3xl">
+          <div className="mt-auto text-lg text-white font-bold leading-none mr-2 sm:text-3xl">
             {parseInt(realTps.toString())}
           </div>
           <div className="text-gray-400 mt-auto">tx/s</div>
@@ -59,7 +61,7 @@ export function SolanaTpsChart({ tpsData, realTps }: SolanaTpsChartParams) {
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
+          className="aspect-auto h-[150px] w-full"
         >
           <BarChart
             accessibilityLayer
@@ -70,23 +72,17 @@ export function SolanaTpsChart({ tpsData, realTps }: SolanaTpsChartParams) {
             }}
           >
             <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="slot"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              minTickGap={32}
-            />
+
             <ChartTooltip
               content={
                 <ChartTooltipContent
                   className="w-[150px] bg-[#1c1c1c] text-white"
                   nameKey="slot"
-                  labelFormatter={(value) => value}
+                  labelFormatter={(value, slot) => `Slot: ${slot[0]?.payload?.slot}`} // Updated to show slot number
                 />
               }
             />
-            <Bar dataKey={"tps"} fill="#4ade80" />
+            <Bar dataKey={"tps"} fill="#8000ff" />
           </BarChart>
         </ChartContainer>
       </CardContent>

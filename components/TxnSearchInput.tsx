@@ -8,7 +8,7 @@ export const TxnSearchInput = () => {
   const [txn, setTxn] = useState("");
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (txn.trim()) {
       router.push(`/txn/${txn}`);
     }
