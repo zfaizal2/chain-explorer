@@ -3,8 +3,7 @@ import { HeliusParsedTransaction } from "@/types/helius";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
-import { TabsContent, TabsTrigger } from "@radix-ui/react-tabs";
-import { Tabs, TabsList } from "./ui/tabs";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
   TableHeader,
@@ -12,7 +11,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
-} from "./ui/table";
+} from "@/components/ui/table";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { fetchTokenMetadata } from "@/lib/helpers";
 import Image from "next/image";
@@ -81,9 +80,9 @@ const TransactionDetails: React.FC<TransactionDetailsProps> = async ({
 
       <Tabs defaultValue="native-transfers">
         <TabsList className="grid w-full grid-cols-3 mb-4 rounded">
-          <TabsTrigger value="native-transfers">Native Transfers</TabsTrigger>
-          <TabsTrigger value="token-transfers">Token Transfers</TabsTrigger>
-          <TabsTrigger value="instructions">Instructions</TabsTrigger>
+          <TabsTrigger className="data-[state=active]:bg-black data-[state=active]:text-white" value="native-transfers">Native Transfers</TabsTrigger>
+          <TabsTrigger className="data-[state=active]:bg-black data-[state=active]:text-white" value="token-transfers">Token Transfers</TabsTrigger>
+          <TabsTrigger className="data-[state=active]:bg-black data-[state=active]:text-white" value="instructions">Instructions</TabsTrigger>
         </TabsList>
         <TabsContent className="rounded-lg" value="native-transfers">
           <Table>
@@ -160,7 +159,6 @@ const TransactionDetails: React.FC<TransactionDetailsProps> = async ({
                 <p className="text-gray-400 mr-2">Program ID:</p>
                 <p>{instruction.programId}</p>
               </div>
-              {/* <p className="text-gray-400">Data: {instruction.data}</p> */}
               <p className="text-gray-400">Accounts:</p>
               {instruction.accounts.map((account) => {
                 return <p key={account}>{account}</p>;
