@@ -18,7 +18,6 @@ import { fetchStakingStats } from "@/lib/helpers"
 
 export const StakingActivityCard = async () => {
   const stakingStats = await fetchStakingStats();
-  // console.log('stakingstats', stakingStats.stakingChartData)
   return (
     <Card className="bg-[#1c1c1c] border-none rounded-xl">
       <CardHeader>

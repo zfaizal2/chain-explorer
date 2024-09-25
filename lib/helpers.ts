@@ -170,7 +170,6 @@ export type MappedStakingStats = {
 export const mappedStakingStats = async (
   stakingStats: StakingStatsResponse
 ) => {
-  // console.log('stakingStats', stakingStats.epochCharts.deactivated)
   const epochs = Object.keys(stakingStats.epochCharts.activated.data);
   const activatingStake = Object.values(
     stakingStats.epochCharts.activated.data
@@ -183,11 +182,9 @@ export const mappedStakingStats = async (
   );
   let stakingChange = 0;
   const stakingChartData = epochs.map((epoch, index) => {
-    const epochNumber = parseInt(epoch);
     stakingChange +=
       activatingStake[index] +
       deactivatedStake[index];
-      console.log('epoch', epochNumber, activatingStake[index], deactivatedStake[index])
     return {
       epoch,
       activatingStake: activatingStake[index],
@@ -197,7 +194,6 @@ export const mappedStakingStats = async (
   });
   const startEpochStake = stakingChartData[0].totalStake;
   const stakingPercentChange = (stakingChange / startEpochStake) * 100;
-  console.log('stakingPercentChange', stakingPercentChange, stakingChange, startEpochStake)
   return {
     stakingChartData,
     stakingPercentChange
