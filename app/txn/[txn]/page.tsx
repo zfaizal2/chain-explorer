@@ -6,6 +6,7 @@ import {
   fetchParsedTransactionsMap,
 } from "@/lib/helpers";
 import { SandwichAlert } from "@/components/SandwichAlert";
+export const runtime = 'edge';
 
 interface TransactionPageProps {
   params: {
