@@ -9,7 +9,7 @@ const connection = new Connection(
 export const fetchBundleFromTransaction = async (txHash: string) => {
   try {
     const response = await fetch(
-      `https://explorer.jito.wtf/wtfrest/api/v1/bundles/transaction/${txHash}`
+      `https://bundles.jito.wtf/api/v1/bundles/transaction/${txHash}`
     );
     if (!response.ok) {
       throw new Error(
@@ -27,7 +27,7 @@ export const fetchBundleFromTransaction = async (txHash: string) => {
 export const fetchBundleInfo = async (bundleId: string) => {
   try {
     const response = await fetch(
-      `https://explorer.jito.wtf/wtfrest/api/v1/bundles/bundle/${bundleId}`
+      `https://bundles.jito.wtf/api/v1/bundles/bundle/${bundleId}`
     );
     if (!response.ok) {
       throw new Error(
